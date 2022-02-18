@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ACarousel",
+        "repositoryURL": "https://github.com/JWAutumn/ACarousel",
+        "state": {
+          "branch": null,
+          "revision": "8a322513580f21288fd87eb3a1341c247b3e2a76",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "PopupView",
+        "repositoryURL": "https://github.com/exyte/PopupView.git",
+        "state": {
+          "branch": null,
+          "revision": "77c04cef5651a07ab795f8b4edeb39cb231b2411",
+          "version": "1.0.7"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
