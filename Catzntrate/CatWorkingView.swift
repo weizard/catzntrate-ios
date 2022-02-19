@@ -32,7 +32,7 @@ struct CatWorkingView: View {
     // =  default time setting  =
     // ==========================
     
-    let _defaultWorkingTime = 5
+    let _defaultWorkingTime = 30
     let _defaultRestingTime = 3
     
     // ==========================
@@ -53,7 +53,9 @@ struct CatWorkingView: View {
     @State private var timeRemaining = 0 // will be setup with defaul when start
     @State private var workingState: PetWorkingState = PetWorkingState.idle
     @State private var prevWorkingState = PetWorkingState.idle
+    @State private var tmpWorkingState = PetWorkingState.idle
     @State private var hasPetted = false
+    @Environment(\.scenePhase) var scenePhase
   
     // timer trigger
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -162,7 +164,33 @@ struct CatWorkingView: View {
                 
                 // just for filled
                 Spacer()
-            }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true ){ComingSoonView()}
+            }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true ){ComingSoonView()}.onAppear {
+//                tmpWorkingState = prevWorkingState;
+//                prevWorkingState = workingState;
+//                workingState = tmpWorkingState;
+//                print("ContentView appeared!")
+            }.onDisappear{
+                if (workingState==PetWorkingState.working || workingState==PetWorkingState.resting){
+                    prevWorkingState = workingState;
+                    workingState = PetWorkingState.waiting;
+                }
+                
+//                prevWorkingState = workingState;
+//                workingState = PetWorkingState.waiting;
+//                print("DetailView disappeared!")
+            }.onChange(of: scenePhase) { (phase) in
+                switch phase {
+                case .active:
+                    print("ScenePhase: Active")
+                case .background:
+                    if (workingState==PetWorkingState.working || workingState==PetWorkingState.resting){
+                        prevWorkingState = workingState;
+                        workingState = PetWorkingState.waiting;
+                    }
+                case .inactive:
+                    print("ScenePhase: inactive entering background" )
+                }
+            }
         }
     }
 }

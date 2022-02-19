@@ -17,11 +17,15 @@ extension View {
     }
 }
 
+
+
 struct ContentView: View {
     
     @State public var latestUsingPet = "0x" // latest user using pet's id
     @State public var pets:[Pet] = []
     @State public var currentPetIndex = 0 // current pet user use
+    
+    
     
     enum Tab {
         case CatWorking
@@ -31,18 +35,20 @@ struct ContentView: View {
     }
     
     var body: some View {
+       
+        
         TabView{
             CatWorkingView(pets: $pets, currentPetIndex: $currentPetIndex).tabItem{
-                Label("Work",systemImage: "star").tag(Tab.CatWorking)
+                Label("Work",systemImage: "text.bubble").tag(Tab.CatWorking)
             }
             CatStatusView(pets: $pets, currentPetIndex: $currentPetIndex).tabItem{
-                Label("Cat Status",systemImage: "star").tag(Tab.CatWorking)
+                Label("Cat Status",systemImage: "ellipsis.circle.fill").tag(Tab.CatWorking)
             }
             MarketplaceView().tabItem{
-                Label("Market Place",systemImage: "star").tag(Tab.CatWorking)
+                Label("Market Place",systemImage: "cart.fill").tag(Tab.CatWorking)
             }
             BreedView().tabItem{
-                Label("Breed",systemImage: "star").tag(Tab.CatWorking)
+                Label("Breed",systemImage: "smiley").tag(Tab.CatWorking)
             }
         }.onAppear(){
             self.pets = [pet1,pet2]
