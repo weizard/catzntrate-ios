@@ -38,10 +38,10 @@ struct ContentView: View {
             CatStatusView(pets: $pets, currentPetIndex: $currentPetIndex).tabItem{
                 Label("Cat Status",systemImage: "star").tag(Tab.CatWorking)
             }
-            ComingSoonView().tabItem{
+            MarketplaceView().tabItem{
                 Label("Market Place",systemImage: "star").tag(Tab.CatWorking)
             }
-            ComingSoonView().tabItem{
+            BreedView().tabItem{
                 Label("Breed",systemImage: "star").tag(Tab.CatWorking)
             }
         }.onAppear(){

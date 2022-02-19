@@ -87,7 +87,6 @@ struct CatStatusView: View {
                         Text("HP: "+String(pets[currentPetIndex].status[3])+"/100").font(.system(size: 18))
                     }
                     // cat
-                    // Image("bufficorn").resizable().scaledToFit().frame(height: 200)
                     ACarousel(pets.indices, id:\.self, index: $currentPetIndex){
                         _petIndex in
                         Image(pets[_petIndex].imageUrl).resizable().scaledToFit().frame(height: 200)

@@ -31,6 +31,7 @@ struct CatWorkingView: View {
     // ========= config =========
     // =  default time setting  =
     // ==========================
+    
     let _defaultWorkingTime = 5
     let _defaultRestingTime = 3
     

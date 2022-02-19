@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ComingSoonView: View {
     var body: some View {
-        Text("Coming Soon!").frame(width: 300, height: 150).background(.white).cornerRadius(30)
+        Text("Coming Soon!").foregroundColor(.black).frame(width: 300, height: 150).background(.white).cornerRadius(30)
     }
 }
 
