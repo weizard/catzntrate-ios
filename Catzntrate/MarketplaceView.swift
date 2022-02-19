@@ -15,8 +15,10 @@ enum PurchaseKind:String {
 
 struct MarketplaceView: View {
     
-    @State private var showPopup = false
-    @State private var popupKind:PurchaseKind = PurchaseKind.food
+    @State private var showPurchasePopup = false
+    @State private var showComingSoonPopup = false
+    @State private var popupKind = "comingSoon"
+    @State private var purchaseKind:PurchaseKind = PurchaseKind.food
     
     var columns: [GridItem] =
     Array(repeating: .init(.flexible()), count: 2)
@@ -25,12 +27,13 @@ struct MarketplaceView: View {
         return{
             switch kind {
             case "food":
-                self.popupKind = PurchaseKind.food
+                self.purchaseKind = PurchaseKind.food
             default:
                 print("This stuff should not at here")
                 return
             }
-            self.showPopup = true
+            self.popupKind = "purchase"
+            self.showPurchasePopup = true
         }
     }
     
@@ -38,7 +41,7 @@ struct MarketplaceView: View {
         ZStack{
             Image("forest_bg").resizable().opacity(0.2)
             VStack{
-                CatzntrateHeaderBar(showComingSoonPopup: .constant(false))
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup)
                 GeometryReader{
                     geometry in
                     ScrollView{
@@ -54,8 +57,10 @@ struct MarketplaceView: View {
                         }.padding(EdgeInsets(top: 40, leading: 15, bottom: 10, trailing: 15))
                     }.background(Color.white).opacity(0.8).frame(height:geometry.size.height*0.9).border(Color.black, width: 3)
                 }
-            }.popup(isPresented:$showPopup, closeOnTapOutside: true){
-                PurchaseView(purchaseKind: $popupKind)
+            }.popup(isPresented:$showPurchasePopup , closeOnTapOutside: true){
+                PurchaseView(purchaseKind: $purchaseKind)
+            }.popup(isPresented: $showComingSoonPopup , closeOnTapOutside: true){
+                ComingSoonView()
             }
         }
     }

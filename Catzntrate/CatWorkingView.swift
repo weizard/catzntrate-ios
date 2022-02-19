@@ -50,7 +50,7 @@ struct CatWorkingView: View {
     @State public var showComingSoonPopup = false
     
     // working
-    @State private var timeRemaining = 0 // will be setup with defaul when this view appear and start
+    @State private var timeRemaining = 0 // will be setup with defaul when start
     @State private var workingState: PetWorkingState = PetWorkingState.idle
     @State private var prevWorkingState = PetWorkingState.idle
     @State private var hasPetted = false
@@ -163,8 +163,6 @@ struct CatWorkingView: View {
                 // just for filled
                 Spacer()
             }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true ){ComingSoonView()}
-        }.onAppear{
-            self.timeRemaining = _defaultWorkingTime
         }
     }
 }

@@ -17,12 +17,12 @@ struct CatzntrateHeaderBar: View {
     
     var body: some View {
         HStack{
-            Button(action: showAction){
-                Text("food: 10")
-            }
+            Text("food: 10")
             Text("CFT: 10")
             Text("CGT: 10")
-            Text("items")
+            Button(action:showAction){
+                Text("items")
+            }
         }
         .border(Color.black).padding(EdgeInsets(top: 20, leading: 0, bottom: 50, trailing: 0))
     }

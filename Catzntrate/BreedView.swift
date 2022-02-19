@@ -10,6 +10,7 @@ import PopupView
 
 struct BreedView: View {
     @State private var showChild = false
+    @State private var showComingSoonPopup = false
     
     func breedAction()->Void{
         self.showChild = true
@@ -21,7 +22,7 @@ struct BreedView: View {
             Image("forest_bg").resizable().opacity(0.2)
             
             VStack{
-                CatzntrateHeaderBar(showComingSoonPopup: .constant(false))
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup)
                 
                 Spacer().frame(height:150)
                 // parents
@@ -50,6 +51,8 @@ struct BreedView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.black, lineWidth: 1)
                 )
+            }.popup(isPresented: $showComingSoonPopup,closeOnTapOutside: true){
+                ComingSoonView()
             }
         }
     }
