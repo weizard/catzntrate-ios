@@ -70,10 +70,13 @@ struct BreedView: View {
                 CatzntrateButton(action: breedAction, text: "Breed", systemName:"moon.zzz")
                 Spacer()
             }.popup(isPresented: $showChild,closeOnTapOutside: true){
-                Image("bufficorn").resizable().scaledToFit().frame(width:100).padding(EdgeInsets(top: 20, leading: 80, bottom: 20, trailing: 80)).background(Color.white).cornerRadius(20).overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.black, lineWidth: 1)
-                )
+                VStack{
+                    Image("bufficorn").resizable().scaledToFit().frame(width:100).padding(EdgeInsets(top: 20, leading: 80, bottom: 20, trailing: 80)).background(Color.white).cornerRadius(20).overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.black, lineWidth: 1))
+                    Text("Congrats! You get a new baby!").foregroundColor(.black).fontWeight(.semibold)
+                }
+                
             }.popup(isPresented: $showComingSoonPopup,closeOnTapOutside: true){
                 ComingSoonView()
             }.popup(isPresented:$showWalletPopup, closeOnTap:false, closeOnTapOutside: true){WalletPopupView(userAccount: $userAccount)}

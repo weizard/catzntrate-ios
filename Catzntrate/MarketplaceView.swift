@@ -59,9 +59,12 @@ struct MarketplaceView: View {
                     ScrollView{
                         LazyVGrid(columns: columns){
                             Button(action:self.purchaseAction(kind: "food")){
-                                VStack{
-                                    Image("cat_food").resizable().scaledToFit()
-                                    Text("1 CFT")
+                                VStack( spacing: 0 ){
+                                    Image("cat_food").resizable().scaledToFit().border(Color.black, width: 1)
+                                    HStack{
+                                        Image("CFT").resizable().scaledToFit().frame(width: 35)
+                                        Text("x 1").fontWeight(.bold).font(.system(size: 30))
+                                    }
                                 }
                                 
                             }.frame(width:geometry.size.width*0.4).border(Color.black)
