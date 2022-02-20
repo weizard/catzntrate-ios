@@ -8,6 +8,7 @@
 import SwiftUI
 import ACarousel
 import web3
+import BigInt
 
 enum PetWorkingState {
     case idle    // idle
@@ -37,6 +38,7 @@ struct CatWorkingView: View {
     @Binding var pets:[Pet]
     @Binding var currentPetIndex:Int
     @Binding var userAccount: EthereumAccount
+    @Binding var userBalances:[BigUInt]
     
     // ==========================
     // ===       State        ===
@@ -71,7 +73,7 @@ struct CatWorkingView: View {
         self.timeRemaining = _defaultWorkingTime
     }
     
-    func stopAction() -> Void{
+    func finishAction() -> Void{
         self.prevWorkingState = self.workingState
         self.workingState = PetWorkingState.idle
     }
@@ -92,12 +94,13 @@ struct CatWorkingView: View {
     }
     
     
+    
     var body: some View {
         ZStack{
             Image("forest_bg").resizable().opacity(0.2)
             VStack( spacing: 20 ){
-                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup, showWalletPopup: $showWalletPopup)
-                
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup, showWalletPopup: $showWalletPopup, userBalances: $userBalances)
+
                 // timer
                 TimerView(timeRemaining: $timeRemaining).onReceive(timer) { _ in
                     if timeRemaining > 0 && self.workingState != PetWorkingState.waiting {
@@ -156,7 +159,7 @@ struct CatWorkingView: View {
                 case .waiting:
                     HStack{
                         CatzntrateButton(action: countinueAction, text: "Continue", systemName:"play.circle")
-                        CatzntrateButton(action: stopAction, text: "Stop", systemName:"stop.circle")
+                        CatzntrateButton(action: finishAction, text: "Finish", systemName:"stop.circle")
                     }
                 default:
                     VStack{
@@ -165,7 +168,7 @@ struct CatWorkingView: View {
                         }
                         HStack{
                             CatzntrateButton(action: waitingAction, text: "Pause", systemName:"pause.rectangle")
-                            CatzntrateButton(action: stopAction, text: "Stop", systemName:"stop.circle")
+                            CatzntrateButton(action: finishAction, text: "Finish", systemName:"stop.circle")
                         }
                     }
                 }
@@ -199,6 +202,6 @@ struct CatWorkingView: View {
 struct CatWorkingView_Previews: PreviewProvider {
     static var previews: some View {
         let keyStorage = EthereumKeyLocalStorage()
-        CatWorkingView(pets: .constant([]), currentPetIndex: .constant(0), userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
+        CatWorkingView(pets: .constant([]), currentPetIndex: .constant(0), userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)), userBalances: .constant([]))
     }
 }

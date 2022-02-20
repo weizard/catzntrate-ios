@@ -11,9 +11,6 @@ struct TimerView: View {
     
     @Binding var timeRemaining:Int
     
-    // timer trigger
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
     var body: some View {
         HStack{
             Image(systemName: "alarm.fill").padding(0).foregroundColor(.black)

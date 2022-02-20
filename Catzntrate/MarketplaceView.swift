@@ -8,6 +8,7 @@
 import SwiftUI
 import PopupView
 import web3
+import BigInt
 
 enum PurchaseKind:String {
     case none
@@ -21,6 +22,7 @@ struct MarketplaceView: View {
     // ==========================
     
     @Binding var userAccount: EthereumAccount
+    @Binding var userBalances:[BigUInt]
     
     // ==========================
     // ===       State        ===
@@ -53,7 +55,7 @@ struct MarketplaceView: View {
         ZStack{
             Image("forest_bg").resizable().opacity(0.2)
             VStack{
-                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup, showWalletPopup: $showWalletPopup)
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup, showWalletPopup: $showWalletPopup, userBalances: $userBalances)
                 GeometryReader{
                     geometry in
                     ScrollView{
@@ -81,6 +83,6 @@ struct MarketplaceView: View {
 struct MarketplaceView_Previews: PreviewProvider {
     static var previews: some View {
         let keyStorage = EthereumKeyLocalStorage()
-        MarketplaceView(userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
+        MarketplaceView(userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)), userBalances: .constant([]))
     }
 }

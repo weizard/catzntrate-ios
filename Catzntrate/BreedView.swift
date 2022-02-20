@@ -8,6 +8,7 @@
 import SwiftUI
 import PopupView
 import web3
+import BigInt
 
 struct BreedView: View {
     
@@ -24,6 +25,7 @@ struct BreedView: View {
     @State private var showChild = false
     @State private var showComingSoonPopup = false
     @State private var showWalletPopup = false
+    @Binding var userBalances:[BigUInt]
     
     func breedAction()->Void{
         self.showChild = true
@@ -35,7 +37,7 @@ struct BreedView: View {
             Image("forest_bg").resizable().opacity(0.2)
             
             VStack{
-                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup,showWalletPopup: $showWalletPopup)
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup,showWalletPopup: $showWalletPopup, userBalances: $userBalances)
                 
                 Spacer().frame(height:150)
                 // parents
@@ -84,6 +86,6 @@ struct BreedView: View {
 struct BreedView_Previews: PreviewProvider {
     static var previews: some View {
         let keyStorage = EthereumKeyLocalStorage()
-        BreedView(userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
+        BreedView(userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)), userBalances: .constant([]))
     }
 }

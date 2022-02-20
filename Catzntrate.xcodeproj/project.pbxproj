@@ -28,6 +28,8 @@
 		D8C01B7427BE0BC600494E03 /* CatzntrateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B7327BE0BC600494E03 /* CatzntrateTests.swift */; };
 		D8C01B7E27BE0BC600494E03 /* CatzntrateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B7D27BE0BC600494E03 /* CatzntrateUITests.swift */; };
 		D8C01B8027BE0BC600494E03 /* CatzntrateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B7F27BE0BC600494E03 /* CatzntrateUITestsLaunchTests.swift */; };
+		D8E530BF27C2508A00AAB6DD /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E530BE27C2508A00AAB6DD /* Constant.swift */; };
+		D8E530C127C2554700AAB6DD /* CatzntrateContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E530C027C2554700AAB6DD /* CatzntrateContract.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		D8C01B7927BE0BC600494E03 /* CatzntrateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatzntrateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C01B7D27BE0BC600494E03 /* CatzntrateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatzntrateUITests.swift; sourceTree = "<group>"; };
 		D8C01B7F27BE0BC600494E03 /* CatzntrateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatzntrateUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D8E530BE27C2508A00AAB6DD /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		D8E530C027C2554700AAB6DD /* CatzntrateContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatzntrateContract.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,18 +127,20 @@
 			isa = PBXGroup;
 			children = (
 				D8C01B6227BE0BC400494E03 /* CatzntrateApp.swift */,
-				D878A1B027C20B8900964D05 /* WalletPopupView.swift */,
 				D8C01B6427BE0BC400494E03 /* ContentView.swift */,
-				D814CEE627BEA214008C82DA /* CatzntrateHeaderBar.swift */,
-				D814CEF727BECB7F008C82DA /* ComingSoonView.swift */,
-				D878A1A227C0230400964D05 /* TimerView.swift */,
-				D878A1A627C0D0F600964D05 /* PurchaseView.swift */,
-				D878A1AA27C15BF000964D05 /* SkillPointPopupView.swift */,
 				D84D28FD27BE0CF30080151B /* CatWorkingView.swift */,
 				D814CEE427BE395B008C82DA /* CatStatusView.swift */,
 				D878A1A427C0867700964D05 /* MarketplaceView.swift */,
 				D878A1A827C0E7EF00964D05 /* BreedView.swift */,
+				D8E530BE27C2508A00AAB6DD /* Constant.swift */,
 				D84D28FF27BE1FB70080151B /* Utils.swift */,
+				D814CEF727BECB7F008C82DA /* ComingSoonView.swift */,
+				D814CEE627BEA214008C82DA /* CatzntrateHeaderBar.swift */,
+				D878A1A227C0230400964D05 /* TimerView.swift */,
+				D8E530C027C2554700AAB6DD /* CatzntrateContract.swift */,
+				D878A1B027C20B8900964D05 /* WalletPopupView.swift */,
+				D878A1AA27C15BF000964D05 /* SkillPointPopupView.swift */,
+				D878A1A627C0D0F600964D05 /* PurchaseView.swift */,
 				D8C01B6627BE0BC600494E03 /* Assets.xcassets */,
 				D8C01B6827BE0BC600494E03 /* Preview Content */,
 			);
@@ -310,9 +316,11 @@
 				D8C01B6327BE0BC400494E03 /* CatzntrateApp.swift in Sources */,
 				D878A1A527C0867700964D05 /* MarketplaceView.swift in Sources */,
 				D878A1A727C0D0F600964D05 /* PurchaseView.swift in Sources */,
+				D8E530C127C2554700AAB6DD /* CatzntrateContract.swift in Sources */,
 				D878A1AB27C15BF000964D05 /* SkillPointPopupView.swift in Sources */,
 				D878A1A927C0E7EF00964D05 /* BreedView.swift in Sources */,
 				D814CEE727BEA214008C82DA /* CatzntrateHeaderBar.swift in Sources */,
+				D8E530BF27C2508A00AAB6DD /* Constant.swift in Sources */,
 				D814CEF827BECB7F008C82DA /* ComingSoonView.swift in Sources */,
 				D84D28FE27BE0CF30080151B /* CatWorkingView.swift in Sources */,
 				D814CEE527BE395B008C82DA /* CatStatusView.swift in Sources */,

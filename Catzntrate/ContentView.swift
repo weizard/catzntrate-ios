@@ -8,9 +8,12 @@
 import SwiftUI
 import PopupView
 import web3
+import BigInt
 
 let pet1 = Pet(id: 0, status: [10,20,4,35,98,0], attrs: [10,10,10,10], imageUrl: "bufficorn")
 let pet2 = Pet(id: 1, status: [1,0,0,50,100,1], attrs: [6,4,9,2], imageUrl: "cat")
+
+
 
 extension View {
     func hidden(_ shouldHide: Bool) -> some View {
@@ -20,11 +23,14 @@ extension View {
 
 struct ContentView: View {
     
+    @State public var userAccount:EthereumAccount
+    
     @State public var latestUsingPet = "0x" // latest user using pet's id
     @State public var pets:[Pet] = []
     @State public var currentPetIndex = 0 // current pet user use
+    @State public var userBalaces:[BigUInt] = [BigUInt(0),BigUInt(0),BigUInt(0),BigUInt(0)] // [food, CFT, CGT, MATIC]
     
-    @State public var userAccount:EthereumAccount
+    @State var counter = 0
     
     init(){
         let keyStorage = EthereumKeyLocalStorage()
@@ -44,23 +50,48 @@ struct ContentView: View {
         case Breed
     }
     
+    
+    
+    func getBalance() async ->Void{
+        do{
+            userBalaces[3] =  try await ethClient.eth_getBalance(address: userAccount.address, block: EthereumBlock(rawValue: "latsst"))
+        }catch{
+            print(error)
+        }
+    }
+    
     var body: some View {
         TabView{
-            CatWorkingView(pets: $pets, currentPetIndex: $currentPetIndex,userAccount: $userAccount).tabItem{
+            CatWorkingView(pets: $pets, currentPetIndex: $currentPetIndex,userAccount: $userAccount,userBalances: $userBalaces).tabItem{
                 Label("Work",systemImage: "text.bubble").tag(Tab.CatWorking)
             }
-            CatStatusView(pets: $pets, currentPetIndex: $currentPetIndex,userAccount: $userAccount).tabItem{
+            CatStatusView(pets: $pets, currentPetIndex: $currentPetIndex,userAccount: $userAccount,userBalances: $userBalaces).tabItem{
                 Label("Cat Status",systemImage: "ellipsis.circle.fill").tag(Tab.CatWorking)
             }
-            MarketplaceView(userAccount: $userAccount).tabItem{
+            MarketplaceView(userAccount: $userAccount,userBalances: $userBalaces).tabItem{
                 Label("Market Place",systemImage: "cart.fill").tag(Tab.CatWorking)
             }
-            BreedView(userAccount: $userAccount).tabItem{
+            BreedView(userAccount: $userAccount,userBalances: $userBalaces).tabItem{
                 Label("Breed",systemImage: "smiley").tag(Tab.CatWorking)
             }
         }.onAppear(){
             self.pets = [pet1,pet2]
+        }.task {
+            while(true){
+                do{
+                    // food
+                    userBalaces[0] = try await erc20Instance.balanceOf(tokenContract: CatzFoodAddress, address: userAccount.address)
+                    // CFT
+                    userBalaces[1] = try await erc20Instance.balanceOf(tokenContract: CFTAddress, address: userAccount.address)
+                    // CGT
+                    userBalaces[2] = try await erc20Instance.balanceOf(tokenContract: CGTAddress, address: userAccount.address)
+                    // MATIC
+                    userBalaces[3] = try await ethClient.eth_getBalance(address: userAccount.address, block: EthereumBlock(rawValue: "latest"))                
+                    sleep(3)
+                }catch{print(error)}
+            }
         }
+        
     }
 }
 

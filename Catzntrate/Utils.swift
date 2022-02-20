@@ -7,16 +7,17 @@
 
 import Foundation
 import SwiftUI
+import BigInt
+import web3
 
-struct Pet {
-    var id:Int
-    var status:[Int] // [lv, exp, skillPoint, energy, saturation, gender]
-    var attrs:[Int]  // [efficency, curiousity, luck, vitaity]
-    var imageUrl: String // img link
-}
+// web3
+let ethClient = EthereumClient(url: URL(string: ethClientUrl)!)
+let erc20Instance = ERC20.init(client: ethClient)
 
-let ethClient = "https://rpc-mumbai.matic.today"
+// timer trigger
+let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
+// component
 struct CatzntrateButton:View{
     let action: () -> Void
     let text:String
@@ -26,11 +27,18 @@ struct CatzntrateButton:View{
         Button(action: action) {
             HStack {
                 Image(systemName: systemName)
-                .font(.title)
+                    .font(.title)
                 Text(text).fontWeight(.semibold)
             }.padding().foregroundColor(.white).background(Color.blue).cornerRadius(40)
         }
     }
+}
+
+struct Pet {
+    var id:Int
+    var status:[Int] // [lv, exp, skillPoint, energy, saturation, gender]
+    var attrs:[Int]  // [efficency, curiousity, luck, vitaity]
+    var imageUrl: String // img link
 }
 
 func formateTimer(seconds: Int) -> String {
@@ -49,4 +57,12 @@ func formateTimer(seconds: Int) -> String {
 func formateStatus(current: Int, upbound: Int, statusTitle: String = "") -> String{
     if (statusTitle.count != 0) {return statusTitle + String(format: ": %d / %d", current, upbound)}
     return String(format: "%d / %d", current, upbound)
+}
+
+func formatBigUint(amount: BigUInt, decimal: Int = 18, display:Int=1) -> String {
+    let base = BigUInt(10).power(decimal)
+    let result = amount.quotientAndRemainder(dividingBy: base)
+    let subBase = BigUInt(10).power(decimal-display)
+    let subResult = result.remainder.quotientAndRemainder(dividingBy: subBase)
+    return result.quotient.formatted() + "." + subResult.quotient.formatted()
 }

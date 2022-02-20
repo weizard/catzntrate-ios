@@ -9,6 +9,7 @@ import SwiftUI
 import PopupView
 import ACarousel
 import web3
+import BigInt
 
 enum CatAttribute:String , CaseIterable{
     case Effciency
@@ -26,6 +27,7 @@ struct CatStatusView: View {
     @Binding var pets:[Pet]
     @Binding var currentPetIndex:Int
     @Binding var userAccount: EthereumAccount
+    @Binding var userBalances:[BigUInt]
     
     // ==========================
     // ===       State        ===
@@ -59,7 +61,7 @@ struct CatStatusView: View {
             Image("forest_bg").resizable().opacity(0.2)
             // content
             VStack(spacing: 30){
-                CatzntrateHeaderBar(showComingSoonPopup:$showComingSoonPopup,showWalletPopup: $showWalletPopup)
+                CatzntrateHeaderBar(showComingSoonPopup:$showComingSoonPopup,showWalletPopup: $showWalletPopup, userBalances: $userBalances)
                 // 1st section: feed, equipment
                 HStack(spacing:15){
                     Button(action: feedAction){
@@ -141,6 +143,6 @@ struct CatStatusView: View {
 struct CatStatusView_Previews: PreviewProvider {
     static var previews: some View {
         let keyStorage = EthereumKeyLocalStorage()
-        CatStatusView(pets: .constant([]), currentPetIndex: .constant(0), userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
+        CatStatusView(pets: .constant([]), currentPetIndex: .constant(0), userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)), userBalances: .constant([]))
     }
 }
