@@ -109,7 +109,7 @@ struct CatStatusView: View {
                         Spacer()
                         Button(action: levelUpAction){
                             Text("Level Up").padding(EdgeInsets(top:3,leading:10, bottom:3, trailing:10)).frame(width:80).font(.system(size: 12)).foregroundColor(Color.white).background(.blue)
-                        }.border(Color.blue, width: 4).cornerRadius(30).hidden(pets[currentPetIndex].status[1] != 100)
+                        }.border(Color.blue, width: 4).cornerRadius(30).hidden(pets[currentPetIndex].status[1] < pets[currentPetIndex].status[0]*10+100)
                         Text("Point(+):"+String(pets[currentPetIndex].status[2]))
                         Button(action:increaseAttributeAction){
                             Image(systemName: "plus.circle")

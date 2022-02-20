@@ -77,19 +77,19 @@ struct ContentView: View {
         }.onAppear(){
             self.pets = [pet1,pet2]
         }.task {
-            while(true){
-                do{
-                    // food
-                    userBalaces[0] = try await erc20Instance.balanceOf(tokenContract: CatzFoodAddress, address: userAccount.address)
-                    // CFT
-                    userBalaces[1] = try await erc20Instance.balanceOf(tokenContract: CFTAddress, address: userAccount.address)
-                    // CGT
-                    userBalaces[2] = try await erc20Instance.balanceOf(tokenContract: CGTAddress, address: userAccount.address)
-                    // MATIC
-                    userBalaces[3] = try await ethClient.eth_getBalance(address: userAccount.address, block: EthereumBlock(rawValue: "latest"))                
-                    sleep(3)
-                }catch{print(error)}
-            }
+//            while(true){
+//                do{
+//                    // food
+//                    userBalaces[0] = try await erc20Instance.balanceOf(tokenContract: CatzFoodAddress, address: userAccount.address)
+//                    // CFT
+//                    userBalaces[1] = try await erc20Instance.balanceOf(tokenContract: CFTAddress, address: userAccount.address)
+//                    // CGT
+//                    userBalaces[2] = try await erc20Instance.balanceOf(tokenContract: CGTAddress, address: userAccount.address)
+//                    // MATIC
+//                    userBalaces[3] = try await ethClient.eth_getBalance(address: userAccount.address, block: .Latest)
+//                    sleep(5)
+//                }catch{print(error)}
+//            }
         }
         
     }
