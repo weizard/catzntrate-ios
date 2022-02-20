@@ -104,8 +104,8 @@ struct SkillPointPopupView: View {
                     }
                 }.padding([.leading, .trailing], 15)
                 HStack(spacing: 10){
-                    CatzntrateButton(action: cancelAction, text: "Cancel")
-                    CatzntrateButton(action: confirmAction, text: "Confirm")
+                    CatzntrateButton(action: cancelAction, text: "Cancel", systemName:"xmark.seal")
+                    CatzntrateButton(action: confirmAction, text: "Confirm", systemName:"checkmark.seal")
                 }.padding([.top, .bottom], 30)
             }.padding([.leading,.bottom],10)
         }.padding([.leading,.trailing],10).background(Color.white).cornerRadius(20).overlay(

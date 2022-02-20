@@ -62,8 +62,9 @@ struct CatStatusView: View {
                 // 1st section: feed, equipment
                 HStack(spacing:15){
                     Button(action: feedAction){
-                        Text("Feed").font(.system(size: 20)).padding(5)
-                    }.border(Color.black,width: 3)
+                        Image("feed").resizable().scaledToFit().frame(width:60)
+
+                    }
                     ForEach(0..<4){ i in
                         Button(action: self.equipmentAction(num:i)){
                             Image(systemName: "lock.shield").resizable().scaledToFit().frame( height: 40)}
@@ -124,7 +125,7 @@ struct CatStatusView: View {
                 }.padding([.leading,.trailing],30).padding().background(Color.white)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.black, lineWidth: 2)
+                            .stroke(Color.black, lineWidth: 4)
                     )
                 Spacer()
             }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true){

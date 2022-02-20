@@ -24,13 +24,13 @@ struct PurchaseView: View {
     
     var body: some View {
         VStack{
-            Text("Cost 1 CFT to get").foregroundColor(.black).padding(20).overlay(
+            Text("IT WILL COST 1 CFT").foregroundColor(.black).padding(20).overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.black, lineWidth: 3)
             ).padding([.top],30)
             HStack (spacing:20){
-                CatzntrateButton(action:cancelAction, text: "Cancel")
-                CatzntrateButton(action:self.comfirmAction(kind: purchaseKind.rawValue), text: "Comfirm")
+                CatzntrateButton(action:cancelAction, text: "Cancel", systemName:"xmark.seal")
+                CatzntrateButton(action:self.comfirmAction(kind: purchaseKind.rawValue), text: "Comfirm", systemName:"checkmark.seal")
             }.padding(20)
         }.background(.white).cornerRadius(15).overlay(
             RoundedRectangle(cornerRadius: 15)

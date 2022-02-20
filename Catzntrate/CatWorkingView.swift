@@ -19,11 +19,16 @@ enum PetWorkingState {
 struct CatzntrateButton:View{
     let action: () -> Void
     let text:String
+    let systemName:String
     
     var body: some View {
-        Button(action:action){
-            Text(text).foregroundColor(Color.white).padding(10).font(.system(size: 20))
-        }.background(Color.blue).cornerRadius(5)
+        Button(action: action) {
+            HStack {
+                Image(systemName: systemName)
+                .font(.title)
+                Text(text).fontWeight(.semibold)
+            }.padding().foregroundColor(.white).background(Color.blue).cornerRadius(40)
+        }
     }
 }
 
@@ -158,19 +163,21 @@ struct CatWorkingView: View {
                 // button
                 switch workingState {
                 case .idle:
-                    CatzntrateButton(action: startAction, text: "Start")
+                    CatzntrateButton(action: startAction, text: "Start", systemName:"book")
                 case .waiting:
                     HStack{
-                        CatzntrateButton(action: countinueAction, text: "Continue")
-                        CatzntrateButton(action: stopAction, text: "Stop")
+                        CatzntrateButton(action: countinueAction, text: "Continue", systemName:"play.circle")
+                        CatzntrateButton(action: stopAction, text: "Stop", systemName:"stop.circle")
                     }
                 default:
-                    HStack{
+                    VStack{
                         if !self.hasPetted && self.workingState == PetWorkingState.resting {
-                            CatzntrateButton(action: petAction, text: "Pet")
+                            CatzntrateButton(action: petAction, text: "Pet", systemName:"hand.raised")
                         }
-                        CatzntrateButton(action: waitingAction, text: "Pause")
-                        CatzntrateButton(action: stopAction, text: "Stop")
+                        HStack{
+                            CatzntrateButton(action: waitingAction, text: "Pause", systemName:"pause.rectangle")
+                            CatzntrateButton(action: stopAction, text: "Stop", systemName:"stop.circle")
+                        }
                     }
                 }
                 
