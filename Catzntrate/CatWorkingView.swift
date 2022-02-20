@@ -27,13 +27,18 @@ struct CatzntrateButton:View{
 }
 
 struct CatWorkingView: View {
+    // ==========================
+    // ===    Environment     ===
+    // ==========================
+    
+    @Environment(\.scenePhase) var scenePhase
     
     // ========= config =========
     // =  default time setting  =
     // ==========================
     
-    let _defaultWorkingTime = 30
-    let _defaultRestingTime = 3
+    let _defaultWorkingTime = 15
+    let _defaultRestingTime = 10
     
     // ==========================
     // ===      Binding       ===
@@ -48,6 +53,7 @@ struct CatWorkingView: View {
     
     // coming soon
     @State public var showComingSoonPopup = false
+    @State private var userScreenBrightness = UIScreen.main.brightness
     
     // working
     @State private var timeRemaining = 0 // will be setup with defaul when start
@@ -55,8 +61,7 @@ struct CatWorkingView: View {
     @State private var prevWorkingState = PetWorkingState.idle
     @State private var tmpWorkingState = PetWorkingState.idle
     @State private var hasPetted = false
-    @Environment(\.scenePhase) var scenePhase
-  
+    
     // timer trigger
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -65,6 +70,8 @@ struct CatWorkingView: View {
     // ==========================
     
     func startAction() -> Void {
+        userScreenBrightness = UIScreen.main.brightness
+        UIScreen.main.brightness = 0
         self.prevWorkingState = self.workingState
         self.workingState = PetWorkingState.working
         self.timeRemaining = _defaultWorkingTime
@@ -92,7 +99,6 @@ struct CatWorkingView: View {
     
     
     var body: some View {
-        
         ZStack{
             Image("forest_bg").resizable().opacity(0.2)
             VStack( spacing: 20 ){
@@ -116,6 +122,7 @@ struct CatWorkingView: View {
                         self.hasPetted = false
                     }
                     else if self.workingState == PetWorkingState.working{
+                        UIScreen.main.brightness = userScreenBrightness
                         self.workingState = PetWorkingState.resting
                         timeRemaining = _defaultRestingTime
                     }
@@ -165,19 +172,11 @@ struct CatWorkingView: View {
                 // just for filled
                 Spacer()
             }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true ){ComingSoonView()}.onAppear {
-//                tmpWorkingState = prevWorkingState;
-//                prevWorkingState = workingState;
-//                workingState = tmpWorkingState;
-//                print("ContentView appeared!")
             }.onDisappear{
                 if (workingState==PetWorkingState.working || workingState==PetWorkingState.resting){
                     prevWorkingState = workingState;
                     workingState = PetWorkingState.waiting;
                 }
-                
-//                prevWorkingState = workingState;
-//                workingState = PetWorkingState.waiting;
-//                print("DetailView disappeared!")
             }.onChange(of: scenePhase) { (phase) in
                 switch phase {
                 case .active:

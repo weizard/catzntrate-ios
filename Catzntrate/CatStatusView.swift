@@ -18,6 +18,7 @@ enum CatAttribute:String , CaseIterable{
 
 struct CatStatusView: View {
     @State public var showComingSoonPopup = false
+    @State public var showSkillPointPopup = false
     
     @Binding var pets:[Pet]
     @Binding var currentPetIndex:Int
@@ -28,26 +29,8 @@ struct CatStatusView: View {
     
     func levelUpAction()->Void{}
     
-    func increaseAttributeAction(petIndex:Int, attr: String) ->()->(){
-        return{
-            if pets[currentPetIndex].status[2] == 0 {
-                return
-            }
-            switch attr {
-            case CatAttribute.Effciency.rawValue.lowercased():
-                pets[currentPetIndex].attrs[0] += 1
-            case CatAttribute.Curiosity.rawValue.lowercased():
-                pets[currentPetIndex].attrs[1] += 1
-            case CatAttribute.Luck.rawValue.lowercased():
-                pets[currentPetIndex].attrs[2] += 1
-            case CatAttribute.Vitality.rawValue.lowercased():
-                pets[currentPetIndex].attrs[3] += 1
-            default:
-                print(attr)
-                return
-            }
-            pets[currentPetIndex].status[2] -= 1
-        }
+    func increaseAttributeAction() -> Void{
+        self.showSkillPointPopup = true
     }
     
     func equipmentAction(num: Int)->()->() {
@@ -58,8 +41,6 @@ struct CatStatusView: View {
     }
     
     var body: some View {
-        
-        
         
         ZStack{
             // background
@@ -109,6 +90,9 @@ struct CatStatusView: View {
                             Text("Level Up").padding(EdgeInsets(top:3,leading:10, bottom:3, trailing:10)).frame(width:80).font(.system(size: 12)).foregroundColor(Color.white).background(.blue)
                         }.border(Color.blue, width: 4).cornerRadius(30).hidden(pets[currentPetIndex].status[1] != 100)
                         Text("Point(+):"+String(pets[currentPetIndex].status[2]))
+                        Button(action:increaseAttributeAction){
+                            Image(systemName: "plus.circle")
+                        }
                     }.padding(5)
                     // attributes
                     VStack(spacing:3){
@@ -117,15 +101,16 @@ struct CatStatusView: View {
                                 Text(attr.rawValue)
                                 Spacer()
                                 Text(String(pets[currentPetIndex].attrs[index]))
-                                Button(action:self.increaseAttributeAction(petIndex: currentPetIndex, attr: attr.rawValue.lowercased())){
-                                    Image(systemName: "plus.circle")
-                                }.padding([.bottom],3)
                             }
                         }
                     }.padding([.leading,.bottom],10)
                 }.padding([.leading,.trailing],30)
                 Spacer()
-            }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true){ComingSoonView()}
+            }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true){
+                ComingSoonView()
+            }.popup(isPresented:$showSkillPointPopup, closeOnTap: false, closeOnTapOutside: false){
+                SkillPointPopupView(pets:$pets, currentPetIndex: $currentPetIndex,showSkillPointPopup: $showSkillPointPopup)
+            }
         }
     }
 }

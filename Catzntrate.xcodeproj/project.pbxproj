@@ -18,6 +18,7 @@
 		D878A1A527C0867700964D05 /* MarketplaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1A427C0867700964D05 /* MarketplaceView.swift */; };
 		D878A1A727C0D0F600964D05 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1A627C0D0F600964D05 /* PurchaseView.swift */; };
 		D878A1A927C0E7EF00964D05 /* BreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1A827C0E7EF00964D05 /* BreedView.swift */; };
+		D878A1AB27C15BF000964D05 /* SkillPointPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1AA27C15BF000964D05 /* SkillPointPopupView.swift */; };
 		D8C01B6327BE0BC400494E03 /* CatzntrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B6227BE0BC400494E03 /* CatzntrateApp.swift */; };
 		D8C01B6527BE0BC400494E03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B6427BE0BC400494E03 /* ContentView.swift */; };
 		D8C01B6727BE0BC600494E03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C01B6627BE0BC600494E03 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		D878A1A427C0867700964D05 /* MarketplaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceView.swift; sourceTree = "<group>"; };
 		D878A1A627C0D0F600964D05 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		D878A1A827C0E7EF00964D05 /* BreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedView.swift; sourceTree = "<group>"; };
+		D878A1AA27C15BF000964D05 /* SkillPointPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillPointPopupView.swift; sourceTree = "<group>"; };
 		D8C01B5F27BE0BC400494E03 /* Catzntrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catzntrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C01B6227BE0BC400494E03 /* CatzntrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatzntrateApp.swift; sourceTree = "<group>"; };
 		D8C01B6427BE0BC400494E03 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				D814CEF727BECB7F008C82DA /* ComingSoonView.swift */,
 				D878A1A227C0230400964D05 /* TimerView.swift */,
 				D878A1A627C0D0F600964D05 /* PurchaseView.swift */,
+				D878A1AA27C15BF000964D05 /* SkillPointPopupView.swift */,
 				D84D28FD27BE0CF30080151B /* CatWorkingView.swift */,
 				D814CEE427BE395B008C82DA /* CatStatusView.swift */,
 				D878A1A427C0867700964D05 /* MarketplaceView.swift */,
@@ -300,6 +303,7 @@
 				D8C01B6327BE0BC400494E03 /* CatzntrateApp.swift in Sources */,
 				D878A1A527C0867700964D05 /* MarketplaceView.swift in Sources */,
 				D878A1A727C0D0F600964D05 /* PurchaseView.swift in Sources */,
+				D878A1AB27C15BF000964D05 /* SkillPointPopupView.swift in Sources */,
 				D878A1A927C0E7EF00964D05 /* BreedView.swift in Sources */,
 				D814CEE727BEA214008C82DA /* CatzntrateHeaderBar.swift in Sources */,
 				D814CEF827BECB7F008C82DA /* ComingSoonView.swift in Sources */,
