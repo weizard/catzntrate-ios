@@ -23,6 +23,7 @@ struct BreedView: View {
     
     @State private var showChild = false
     @State private var showComingSoonPopup = false
+    @State private var showWalletPopup = false
     
     func breedAction()->Void{
         self.showChild = true
@@ -34,7 +35,7 @@ struct BreedView: View {
             Image("forest_bg").resizable().opacity(0.2)
             
             VStack{
-                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup)
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup,showWalletPopup: $showWalletPopup)
                 
                 Spacer().frame(height:150)
                 // parents
@@ -75,7 +76,7 @@ struct BreedView: View {
                 )
             }.popup(isPresented: $showComingSoonPopup,closeOnTapOutside: true){
                 ComingSoonView()
-            }
+            }.popup(isPresented:$showWalletPopup, closeOnTap:false, closeOnTapOutside: true){WalletPopupView(userAccount: $userAccount)}
         }
     }
 }

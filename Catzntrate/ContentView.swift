@@ -9,8 +9,8 @@ import SwiftUI
 import PopupView
 import web3
 
-let pet1 = Pet(id: 0, status: [10,20,4,95,98,0], attrs: [10,10,10,10], imageUrl: "bufficorn")
-let pet2 = Pet(id: 1, status: [1,0,0,100,100,1], attrs: [6,4,9,2], imageUrl: "cat")
+let pet1 = Pet(id: 0, status: [10,20,4,35,98,0], attrs: [10,10,10,10], imageUrl: "bufficorn")
+let pet2 = Pet(id: 1, status: [1,0,0,50,100,1], attrs: [6,4,9,2], imageUrl: "cat")
 
 extension View {
     func hidden(_ shouldHide: Bool) -> some View {

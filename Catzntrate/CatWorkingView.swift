@@ -16,22 +16,6 @@ enum PetWorkingState {
     case waiting // pause
 }
 
-struct CatzntrateButton:View{
-    let action: () -> Void
-    let text:String
-    let systemName:String
-    
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: systemName)
-                .font(.title)
-                Text(text).fontWeight(.semibold)
-            }.padding().foregroundColor(.white).background(Color.blue).cornerRadius(40)
-        }
-    }
-}
-
 struct CatWorkingView: View {
     // ==========================
     // ===    Environment     ===
@@ -60,7 +44,10 @@ struct CatWorkingView: View {
     
     // coming soon
     @State public var showComingSoonPopup = false
+    
+    
     @State private var userScreenBrightness = UIScreen.main.brightness
+    @State private var showWalletPopup = false
     
     // working
     @State private var timeRemaining = 0 // will be setup with defaul when start
@@ -109,7 +96,7 @@ struct CatWorkingView: View {
         ZStack{
             Image("forest_bg").resizable().opacity(0.2)
             VStack( spacing: 20 ){
-                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup)
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup, showWalletPopup: $showWalletPopup)
                 
                 // timer
                 TimerView(timeRemaining: $timeRemaining).onReceive(timer) { _ in
@@ -117,10 +104,11 @@ struct CatWorkingView: View {
                         // working or resting
                         timeRemaining -= 1
                         // if working it will get exp
-                        if self.workingState == PetWorkingState.working && pets[currentPetIndex].status[1] < 100{
+                        let levelUpbound = pets[currentPetIndex].status[0]*10+100
+                        if self.workingState == PetWorkingState.working && pets[currentPetIndex].status[1] < levelUpbound {
                             pets[currentPetIndex].status[1] += 10
-                            if pets[currentPetIndex].status[1] > 100 {
-                                pets[currentPetIndex].status[1] = 100
+                            if pets[currentPetIndex].status[1] > levelUpbound {
+                                pets[currentPetIndex].status[1] = levelUpbound
                             }
                         }
                     }else if self.hasPetted && self.workingState == PetWorkingState.resting{
@@ -153,11 +141,12 @@ struct CatWorkingView: View {
                 // status
                 HStack(spacing:0){
                     Image("level").resizable().scaledToFit().frame(width:50)
-                    Text(":"+String(pets[currentPetIndex].status[0])+"   ").fontWeight(.bold).padding(3).font(.system(size: 18))
+                    Text(" :"+String(pets[currentPetIndex].status[0]+1)).fontWeight(.bold).padding(3).font(.system(size: 18)).padding([.trailing],15)
                     Image("hp").resizable().scaledToFit().frame(width:30)
-                    Text(":"+String(pets[currentPetIndex].status[3])+"/100   ").fontWeight(.bold).padding(3).font(.system(size: 18))
+                    Text(formateStatus(current:pets[currentPetIndex].status[3], upbound: 50, statusTitle: " ")).fontWeight(.bold).font(.system(size: 18)).padding([.trailing],15)
                     Image("sp").resizable().scaledToFit().frame(width:30)
-                    Text(":"+String(pets[currentPetIndex].status[4])+"/100").fontWeight(.bold).padding(3).font(.system(size: 18))
+                    Text(formateStatus(current:pets[currentPetIndex].status[4], upbound: 100, statusTitle: " ")).fontWeight(.bold).font(.system(size: 18)).padding([.trailing],15)
+                    
                 }.padding([.top, .bottom], 15)
                 
                 // button
@@ -183,8 +172,9 @@ struct CatWorkingView: View {
                 
                 // just for filled
                 Spacer()
-            }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true ){ComingSoonView()}.onAppear {
-            }.onDisappear{
+            }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true ){ComingSoonView()}
+            .popup(isPresented:$showWalletPopup, closeOnTap:false, closeOnTapOutside: true){WalletPopupView(userAccount: $userAccount)}
+            .onDisappear{
                 if (workingState==PetWorkingState.working || workingState==PetWorkingState.resting){
                     prevWorkingState = workingState;
                     workingState = PetWorkingState.waiting;

@@ -33,6 +33,7 @@ struct CatStatusView: View {
     
     @State public var showComingSoonPopup = false
     @State public var showSkillPointPopup = false
+    @State private var showWalletPopup = false
     
     func feedAction()->Void {
         print("feed")
@@ -58,7 +59,7 @@ struct CatStatusView: View {
             Image("forest_bg").resizable().opacity(0.2)
             // content
             VStack(spacing: 30){
-                CatzntrateHeaderBar(showComingSoonPopup:$showComingSoonPopup)
+                CatzntrateHeaderBar(showComingSoonPopup:$showComingSoonPopup,showWalletPopup: $showWalletPopup)
                 // 1st section: feed, equipment
                 HStack(spacing:15){
                     Button(action: feedAction){
@@ -76,11 +77,11 @@ struct CatStatusView: View {
                     // sn, sexial, hp
                     VStack(alignment: .leading){
                         Image("sn").resizable().scaledToFit().frame(width:50)
-                        Text("  # "+String(format:"%06d",pets[currentPetIndex].id)).fontWeight(.bold).font(.system(size: 18))
+                        Text("# "+String(format:"%06d",pets[currentPetIndex].id)).fontWeight(.bold).font(.system(size: 18)).padding([.leading],10)
                         Image("gender").resizable().scaledToFit().frame(width:50, alignment: .trailing)
-                        Text(pets[currentPetIndex].status[5] != 0 ? "  Male" : "  Female").fontWeight(.bold).font(.system(size: 18))
+                        Text(pets[currentPetIndex].status[5] != 0 ? "Male" : "Female").fontWeight(.bold).font(.system(size: 18)).padding([.leading],10)
                         Image("hp").resizable().scaledToFit().frame(width:35)
-                        Text("  HP: "+String(pets[currentPetIndex].status[3])+"/100").fontWeight(.bold).font(.system(size: 18))
+                        Text(formateStatus(current:pets[currentPetIndex].status[3], upbound: 50,statusTitle:"HP")).fontWeight(.bold).font(.system(size: 18))
                     }
                     // cat
                     ACarousel(pets.indices, id:\.self, index: $currentPetIndex){
@@ -90,11 +91,11 @@ struct CatStatusView: View {
                     // lv, exp, sp
                     VStack(alignment:.leading){
                         Image("level").resizable().scaledToFit().frame(width:50)
-                        Text("LV: "+String(pets[currentPetIndex].status[0])).fontWeight(.bold).font(.system(size: 18))
+                        Text("LV: "+String(pets[currentPetIndex].status[0]+1)).fontWeight(.bold).font(.system(size: 18))
                         Image("exp").resizable().scaledToFit().frame(width:40)
-                        Text("Exp: "+String(pets[currentPetIndex].status[1])+"/40").fontWeight(.bold).font(.system(size: 18))
+                        Text(formateStatus(current:pets[currentPetIndex].status[1], upbound: pets[currentPetIndex].status[0]*10+100,statusTitle:"EXP")).fontWeight(.bold).font(.system(size: 18))
                         Image("sp").resizable().scaledToFit().frame(width:35)
-                        Text("SP: "+String(pets[currentPetIndex].status[4])+"/100").fontWeight(.bold).font(.system(size: 18))
+                        Text(formateStatus(current:pets[currentPetIndex].status[4], upbound: 100,statusTitle:"SP")).fontWeight(.bold).font(.system(size: 18))
                     }
                 }
                 
@@ -122,7 +123,7 @@ struct CatStatusView: View {
                             }
                         }
                     }.padding([.leading,.bottom],10)
-                }.padding([.leading,.trailing],30).padding().background(Color.white)
+                }.padding([.leading,.trailing],30).padding().background(Color.white).cornerRadius(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.black, lineWidth: 4)
@@ -130,9 +131,9 @@ struct CatStatusView: View {
                 Spacer()
             }.popup(isPresented:$showComingSoonPopup, closeOnTapOutside: true){
                 ComingSoonView()
-            }.popup(isPresented:$showSkillPointPopup, closeOnTap: false, closeOnTapOutside: false){
+            }.popup(isPresented:$showSkillPointPopup, closeOnTap: false, closeOnTapOutside: true){
                 SkillPointPopupView(pets:$pets, currentPetIndex: $currentPetIndex,showSkillPointPopup: $showSkillPointPopup)
-            }
+            }.popup(isPresented:$showWalletPopup, closeOnTap:false, closeOnTapOutside: true){WalletPopupView(userAccount: $userAccount)}
         }
     }
 }

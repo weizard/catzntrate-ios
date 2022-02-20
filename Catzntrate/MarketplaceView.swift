@@ -28,6 +28,7 @@ struct MarketplaceView: View {
     
     @State private var showPurchasePopup = false
     @State private var showComingSoonPopup = false
+    @State private var showWalletPopup = false
     @State private var popupKind = "comingSoon"
     @State private var purchaseKind:PurchaseKind = PurchaseKind.food
     
@@ -52,7 +53,7 @@ struct MarketplaceView: View {
         ZStack{
             Image("forest_bg").resizable().opacity(0.2)
             VStack{
-                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup)
+                CatzntrateHeaderBar(showComingSoonPopup: $showComingSoonPopup, showWalletPopup: $showWalletPopup)
                 GeometryReader{
                     geometry in
                     ScrollView{
@@ -72,7 +73,7 @@ struct MarketplaceView: View {
                 PurchaseView(purchaseKind: $purchaseKind)
             }.popup(isPresented: $showComingSoonPopup , closeOnTapOutside: true){
                 ComingSoonView()
-            }
+            }.popup(isPresented:$showWalletPopup, closeOnTap:false, closeOnTapOutside: true){WalletPopupView(userAccount: $userAccount)}
         }
     }
 }
