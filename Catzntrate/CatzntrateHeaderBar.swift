@@ -16,16 +16,28 @@ struct CatzntrateHeaderBar: View {
     }
     
     var body: some View {
-        HStack{
-            Text("food: 10")
-            Text("CFT: 10")
-            Text("CGT: 10")
+
+        HStack(spacing:1){
+            Image("cat_food").resizable().scaledToFit().frame(width:50)
+            Text(":10   ").fontWeight(.bold)
+            Image("CFT").resizable().scaledToFit().frame(width:30)
+            Text(":10   ").fontWeight(.bold)
+            Image("CGT").resizable().scaledToFit().frame(width:30)
+            Text(":10   ").fontWeight(.bold)
+            Image("matic").resizable().scaledToFit().frame(width:30)
+            Text(":10      ").fontWeight(.bold)
             Button(action:showAction){
-                Text("items")
+                Label("",systemImage: "archivebox.fill").scaledToFit()
             }
+            Button(action:showAction){
+                Image("wallet").resizable().scaledToFit().frame(width:30)
+            }
+            
         }
-        .border(Color.black).padding(EdgeInsets(top: 20, leading: 0, bottom: 50, trailing: 0))
+
     }
+    
+    
 }
 
 struct CatzntrateHeaderBar_Previews: PreviewProvider {

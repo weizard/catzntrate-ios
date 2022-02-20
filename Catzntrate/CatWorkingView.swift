@@ -147,9 +147,12 @@ struct CatWorkingView: View {
                 
                 // status
                 HStack(spacing:0){
-                    Text("LV: "+String(pets[currentPetIndex].status[0])).padding(3).font(.system(size: 18))
-                    Text("HP: "+String(pets[currentPetIndex].status[3])+"/100").padding(3).font(.system(size: 18))
-                    Text("SP: "+String(pets[currentPetIndex].status[4])+"/100").padding(3).font(.system(size: 18))
+                    Image("level").resizable().scaledToFit().frame(width:50)
+                    Text(":"+String(pets[currentPetIndex].status[0])+"   ").fontWeight(.bold).padding(3).font(.system(size: 18))
+                    Image("hp").resizable().scaledToFit().frame(width:30)
+                    Text(":"+String(pets[currentPetIndex].status[3])+"/100   ").fontWeight(.bold).padding(3).font(.system(size: 18))
+                    Image("sp").resizable().scaledToFit().frame(width:30)
+                    Text(":"+String(pets[currentPetIndex].status[4])+"/100").fontWeight(.bold).padding(3).font(.system(size: 18))
                 }.padding([.top, .bottom], 15).border(Color.black, width: 2)
                 
                 // button

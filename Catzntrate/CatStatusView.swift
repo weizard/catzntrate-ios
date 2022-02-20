@@ -74,8 +74,11 @@ struct CatStatusView: View {
                 HStack(spacing:15){
                     // sn, sexial, hp
                     VStack(alignment: .leading){
+                        Image("sn").resizable().scaledToFit().frame(width:35)
                         Text("# "+String(format:"%06d",pets[currentPetIndex].id)).font(.system(size: 18))
+                        Image("gender").resizable().scaledToFit().frame(width:35)
                         Text(pets[currentPetIndex].status[5] != 0 ? "Male" : "Female").font(.system(size: 18))
+                        Image("hp").resizable().scaledToFit().frame(width:35)
                         Text("HP: "+String(pets[currentPetIndex].status[3])+"/100").font(.system(size: 18))
                     }
                     // cat
@@ -85,8 +88,11 @@ struct CatStatusView: View {
                     }.frame(height: 200)
                     // lv, exp, sp
                     VStack(alignment:.leading){
+                        Image("level").resizable().scaledToFit().frame(width:50)
                         Text("LV: "+String(pets[currentPetIndex].status[0])).font(.system(size: 18))
+                        Image("exp").resizable().scaledToFit().frame(width:40)
                         Text("Exp: "+String(pets[currentPetIndex].status[1])+"/40").font(.system(size: 18))
+                        Image("sp").resizable().scaledToFit().frame(width:35)
                         Text("SP: "+String(pets[currentPetIndex].status[4])+"/100").font(.system(size: 18))
                     }
                 }
