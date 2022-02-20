@@ -153,7 +153,7 @@ struct CatWorkingView: View {
                     Text(":"+String(pets[currentPetIndex].status[3])+"/100   ").fontWeight(.bold).padding(3).font(.system(size: 18))
                     Image("sp").resizable().scaledToFit().frame(width:30)
                     Text(":"+String(pets[currentPetIndex].status[4])+"/100").fontWeight(.bold).padding(3).font(.system(size: 18))
-                }.padding([.top, .bottom], 15).border(Color.black, width: 2)
+                }.padding([.top, .bottom], 15)
                 
                 // button
                 switch workingState {

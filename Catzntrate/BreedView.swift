@@ -41,7 +41,10 @@ struct BreedView: View {
                 HStack(spacing: 10){
                     VStack{
                         Image("bufficorn").resizable().scaledToFit().frame(width:100)
+                        HStack{
+                        Image("sn").resizable().scaledToFit().frame(width:50)
                         Text(String(format:"#%05d",0)).foregroundColor(.black)
+                        }
                     }.padding(20).background(Color.white).cornerRadius(20).overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.black, lineWidth: 1)
@@ -53,7 +56,10 @@ struct BreedView: View {
                     
                     VStack{
                         Image("cat").resizable().scaledToFit().frame(width:100)
+                        HStack{
+                        Image("sn").resizable().scaledToFit().frame(width:50)
                         Text(String(format:"#%05d",1)).foregroundColor(.black)
+                        }
                     }.padding(20).background(Color.white).cornerRadius(20).overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.black, lineWidth: 1)
