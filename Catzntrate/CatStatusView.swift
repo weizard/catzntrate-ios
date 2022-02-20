@@ -79,7 +79,7 @@ struct CatStatusView: View {
                     // sn, sexial, hp
                     VStack(alignment: .leading){
                         Image("sn").resizable().scaledToFit().frame(width:50)
-                        Text("# "+String(format:"%06d",pets[currentPetIndex].id)).fontWeight(.bold).font(.system(size: 18)).padding([.leading],10)
+                        Text("# "+String(format:"%05d",pets[currentPetIndex].id)).fontWeight(.bold).font(.system(size: 18)).padding([.leading],10)
                         Image("gender").resizable().scaledToFit().frame(width:50, alignment: .trailing)
                         Text(pets[currentPetIndex].status[5] != 0 ? "Male" : "Female").fontWeight(.bold).font(.system(size: 18)).padding([.leading],10)
                         Image("hp").resizable().scaledToFit().frame(width:35)
