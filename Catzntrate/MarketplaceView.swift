@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PopupView
+import web3
 
 enum PurchaseKind:String {
     case none
@@ -14,6 +15,16 @@ enum PurchaseKind:String {
 }
 
 struct MarketplaceView: View {
+    
+    // ==========================
+    // ===      Binding       ===
+    // ==========================
+    
+    @Binding var userAccount: EthereumAccount
+    
+    // ==========================
+    // ===       State        ===
+    // ==========================
     
     @State private var showPurchasePopup = false
     @State private var showComingSoonPopup = false
@@ -68,6 +79,7 @@ struct MarketplaceView: View {
 
 struct MarketplaceView_Previews: PreviewProvider {
     static var previews: some View {
-        MarketplaceView()
+        let keyStorage = EthereumKeyLocalStorage()
+        MarketplaceView(userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
     }
 }

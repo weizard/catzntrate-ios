@@ -7,8 +7,20 @@
 
 import SwiftUI
 import PopupView
+import web3
 
 struct BreedView: View {
+    
+    // ==========================
+    // ===      Binding       ===
+    // ==========================
+    
+    @Binding var userAccount: EthereumAccount
+    
+    // ==========================
+    // ===       State        ===
+    // ==========================
+    
     @State private var showChild = false
     @State private var showComingSoonPopup = false
     
@@ -67,6 +79,7 @@ struct BreedView: View {
 
 struct BreedView_Previews: PreviewProvider {
     static var previews: some View {
-        BreedView()
+        let keyStorage = EthereumKeyLocalStorage()
+        BreedView(userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
     }
 }

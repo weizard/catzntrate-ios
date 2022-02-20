@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ACarousel
+import web3
 
 enum PetWorkingState {
     case idle    // idle
@@ -46,6 +47,7 @@ struct CatWorkingView: View {
     
     @Binding var pets:[Pet]
     @Binding var currentPetIndex:Int
+    @Binding var userAccount: EthereumAccount
     
     // ==========================
     // ===       State        ===
@@ -196,6 +198,7 @@ struct CatWorkingView: View {
 
 struct CatWorkingView_Previews: PreviewProvider {
     static var previews: some View {
-        CatWorkingView(pets: .constant([]), currentPetIndex: .constant(0))
+        let keyStorage = EthereumKeyLocalStorage()
+        CatWorkingView(pets: .constant([]), currentPetIndex: .constant(0), userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
     }
 }

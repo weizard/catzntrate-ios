@@ -24,6 +24,19 @@ struct ContentView: View {
     @State public var pets:[Pet] = []
     @State public var currentPetIndex = 0 // current pet user use
     
+    @State public var userAccount:EthereumAccount
+    
+    init(){
+        let keyStorage = EthereumKeyLocalStorage()
+        let account:EthereumAccount
+        do{
+            account = try EthereumAccount(keyStorage: keyStorage, keystorePassword: "PASSWORD_FOR_DEMO")
+        }catch{
+            account = try! EthereumAccount.create(keyStorage: keyStorage, keystorePassword: "PASSWORD_FOR_DEMO")
+        }
+        self.userAccount = account
+    }
+    
     enum Tab {
         case CatWorking
         case CatAttribute
@@ -33,16 +46,16 @@ struct ContentView: View {
     
     var body: some View {
         TabView{
-            CatWorkingView(pets: $pets, currentPetIndex: $currentPetIndex).tabItem{
+            CatWorkingView(pets: $pets, currentPetIndex: $currentPetIndex,userAccount: $userAccount).tabItem{
                 Label("Work",systemImage: "text.bubble").tag(Tab.CatWorking)
             }
-            CatStatusView(pets: $pets, currentPetIndex: $currentPetIndex).tabItem{
+            CatStatusView(pets: $pets, currentPetIndex: $currentPetIndex,userAccount: $userAccount).tabItem{
                 Label("Cat Status",systemImage: "ellipsis.circle.fill").tag(Tab.CatWorking)
             }
-            MarketplaceView().tabItem{
+            MarketplaceView(userAccount: $userAccount).tabItem{
                 Label("Market Place",systemImage: "cart.fill").tag(Tab.CatWorking)
             }
-            BreedView().tabItem{
+            BreedView(userAccount: $userAccount).tabItem{
                 Label("Breed",systemImage: "smiley").tag(Tab.CatWorking)
             }
         }.onAppear(){

@@ -8,6 +8,7 @@
 import SwiftUI
 import PopupView
 import ACarousel
+import web3
 
 enum CatAttribute:String , CaseIterable{
     case Effciency
@@ -17,11 +18,21 @@ enum CatAttribute:String , CaseIterable{
 }
 
 struct CatStatusView: View {
-    @State public var showComingSoonPopup = false
-    @State public var showSkillPointPopup = false
+    
+    // ==========================
+    // ===      Binding       ===
+    // ==========================
     
     @Binding var pets:[Pet]
     @Binding var currentPetIndex:Int
+    @Binding var userAccount: EthereumAccount
+    
+    // ==========================
+    // ===       State        ===
+    // ==========================
+    
+    @State public var showComingSoonPopup = false
+    @State public var showSkillPointPopup = false
     
     func feedAction()->Void {
         print("feed")
@@ -117,6 +128,7 @@ struct CatStatusView: View {
 
 struct CatStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        CatStatusView(pets: .constant([]), currentPetIndex: .constant(0))
+        let keyStorage = EthereumKeyLocalStorage()
+        CatStatusView(pets: .constant([]), currentPetIndex: .constant(0), userAccount: .constant(try! EthereumAccount(keyStorage: keyStorage)))
     }
 }
