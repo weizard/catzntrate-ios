@@ -11,12 +11,48 @@
         }
       },
       {
+        "package": "BigInt",
+        "repositoryURL": "https://github.com/attaswift/BigInt",
+        "state": {
+          "branch": null,
+          "revision": "0ed110f7555c34ff468e72e1686e59721f2b0da6",
+          "version": "5.3.0"
+        }
+      },
+      {
+        "package": "GenericJSON",
+        "repositoryURL": "https://github.com/zoul/generic-json-swift",
+        "state": {
+          "branch": null,
+          "revision": "a137894b2a217abe489cdf1ea287e6f7819b1051",
+          "version": "2.0.1"
+        }
+      },
+      {
         "package": "PopupView",
         "repositoryURL": "https://github.com/exyte/PopupView.git",
         "state": {
           "branch": null,
           "revision": "77c04cef5651a07ab795f8b4edeb39cb231b2411",
           "version": "1.0.7"
+        }
+      },
+      {
+        "package": "secp256k1",
+        "repositoryURL": "https://github.com/Boilertalk/secp256k1.swift",
+        "state": {
+          "branch": null,
+          "revision": "45e458ec3be46cf0a6eb68bc947f797852dc65d8",
+          "version": "0.1.6"
+        }
+      },
+      {
+        "package": "web3.swift",
+        "repositoryURL": "https://github.com/argentlabs/web3.swift",
+        "state": {
+          "branch": "master",
+          "revision": "769762fdc544734ffe5eabc9e7d1c42260bd9be3",
+          "version": null
         }
       }
     ]

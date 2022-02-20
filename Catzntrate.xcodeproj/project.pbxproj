@@ -19,6 +19,7 @@
 		D878A1A727C0D0F600964D05 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1A627C0D0F600964D05 /* PurchaseView.swift */; };
 		D878A1A927C0E7EF00964D05 /* BreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1A827C0E7EF00964D05 /* BreedView.swift */; };
 		D878A1AB27C15BF000964D05 /* SkillPointPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A1AA27C15BF000964D05 /* SkillPointPopupView.swift */; };
+		D878A1AE27C1BF5C00964D05 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = D878A1AD27C1BF5C00964D05 /* web3.swift */; };
 		D8C01B6327BE0BC400494E03 /* CatzntrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B6227BE0BC400494E03 /* CatzntrateApp.swift */; };
 		D8C01B6527BE0BC400494E03 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C01B6427BE0BC400494E03 /* ContentView.swift */; };
 		D8C01B6727BE0BC600494E03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C01B6627BE0BC600494E03 /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D878A1A127BFF6DB00964D05 /* ACarousel in Frameworks */,
+				D878A1AE27C1BF5C00964D05 /* web3.swift in Frameworks */,
 				D814CEF627BECB5D008C82DA /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +182,7 @@
 			packageProductDependencies = (
 				D814CEF527BECB5D008C82DA /* PopupView */,
 				D878A1A027BFF6DB00964D05 /* ACarousel */,
+				D878A1AD27C1BF5C00964D05 /* web3.swift */,
 			);
 			productName = Catzntrate;
 			productReference = D8C01B5F27BE0BC400494E03 /* Catzntrate.app */;
@@ -256,6 +259,7 @@
 			packageReferences = (
 				D814CEF427BECB5D008C82DA /* XCRemoteSwiftPackageReference "PopupView" */,
 				D878A19F27BFF6DB00964D05 /* XCRemoteSwiftPackageReference "ACarousel" */,
+				D878A1AC27C1BF5C00964D05 /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = D8C01B6027BE0BC400494E03 /* Products */;
 			projectDirPath = "";
@@ -655,6 +659,14 @@
 				minimumVersion = 0.2.0;
 			};
 		};
+		D878A1AC27C1BF5C00964D05 /* XCRemoteSwiftPackageReference "web3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argentlabs/web3.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -667,6 +679,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D878A19F27BFF6DB00964D05 /* XCRemoteSwiftPackageReference "ACarousel" */;
 			productName = ACarousel;
+		};
+		D878A1AD27C1BF5C00964D05 /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D878A1AC27C1BF5C00964D05 /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
