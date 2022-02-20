@@ -115,6 +115,8 @@ struct CatWorkingView: View {
                             }
                         }
                     }else if self.hasPetted && self.workingState == PetWorkingState.resting{
+                        userScreenBrightness = UIScreen.main.brightness
+                        UIScreen.main.brightness = 0
                         timeRemaining = _defaultWorkingTime
                         self.workingState = PetWorkingState.working
                         self.hasPetted = false
